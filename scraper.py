@@ -22,9 +22,10 @@ class DynamexScraper:
     async def start(self) -> None:
         self.playwright = await async_playwright().start()
         self.browser = await self.playwright.chromium.launch(
-            headless=HEADLESS,
-            slow_mo=300
-        )
+    headless=HEADLESS,
+    slow_mo=300,
+    args=["--no-sandbox", "--disable-dev-shm-usage"]
+)
 
     async def stop(self) -> None:
         if self.browser:
